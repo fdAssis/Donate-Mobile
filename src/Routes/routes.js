@@ -10,7 +10,7 @@ import OngMap from '../pages/OngsMap';
 export default function Routes() {
   return (
     <NavigationContainer>
-      <Navigator screenOptions={{ headerShown: false, cardStyle: { backgroundColor: "#f0f" } }}>
+      <Navigator screenOptions={{ headerShown: false }}>
 
         {/*
       <Screen
@@ -25,9 +25,6 @@ export default function Routes() {
         <Screen
           name="OngMap"
           component={OngMap}
-          options={{
-            headerShown: true,
-          }}
         />
 
         <Screen
