@@ -15,7 +15,6 @@ const OngProfile = () => {
   const scrollA = useRef(new Animated.Value(0)).current;
   return (
     <View>
-      <DrawerRoutes />
       <TopNavegation title="Projeto Acolher" scrollA={scrollA} showCancel={true}/>
       <Animated.ScrollView
         onScroll={e => console.log(e.nativeEvent.contentOffset.y)}
