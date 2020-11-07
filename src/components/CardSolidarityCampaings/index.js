@@ -1,22 +1,11 @@
-
 import React from 'react';
-
-import {
-  StyleSheet,
-  View,
-  Image,
-  Text,
-  TouchableOpacity,
-} from 'react-native'
-
-import { Divider } from 'react-native-elements'
-import { Feather, FontAwesome } from '@expo/vector-icons';
-
-
-import { RectButton,  } from 'react-native-gesture-handler';
+import {StyleSheet,View,Image,Text,TouchableOpacity} from 'react-native'
+import { Feather } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 
-const img = "https://conteudo.imguol.com.br/c/entretenimento/16/2017/06/27/naruto-1498593686428_v2_450x337.png";
+const img = "https://www.jornaldosudoeste.com/wp-content/uploads/2018/11/Natal-2018-VITORIADACONQUISTA-300x300.jpg";
+
+import donate from '../../../assets/donate.png';
 
 const CardSolidarityCampaing = () => {
 
@@ -27,23 +16,25 @@ const CardSolidarityCampaing = () => {
         style={styles.image}
       />
 
+      {/*
       <LinearGradient
         // Button Linear Gradient
-        colors={['#8BC6EC', '#9599E2', '#9599E2']}
+        colors={['#f8f8f2', '#ffffff', '#f8f8f2']}
         style={styles.kindCampaing}>
         <Text
           style={{
             backgroundColor: 'transparent',
             fontSize: 18,
-            color: '#FFFFFF',
+            color: '#282a36',
           }}>
           Doacao de alimentos
         </Text>
       </LinearGradient>
+      */}
 
 
       <View style={styles.info}>
-        <Text style={styles.nameCampaing}> Ajude um progrador </Text>
+        <Text style={styles.nameCampaing}> Faz bem fazer bem </Text>
 
         <Text style={styles.texInfo}>
           O "Fundo Colaborativo Enfrente" é composto por diversos parceiros,
@@ -51,12 +42,12 @@ const CardSolidarityCampaing = () => {
         </Text>
         
         <Text style={styles.locateCampaing}> 
-          <Feather name="map-pin" size={24} color="#2AB5D1" />
+          <Feather name="map-pin" size={24} color="#FFFFFF" />
            Av. Castelo Branco, Caxias - MA, Brasil
         </Text>
         
         <Text style={styles.dataCampaing}>
-          <Feather name="calendar" size={24} color="#2AB5D1" />
+          <Feather name="calendar" size={24} color="#FFFFFF" />
           03-10-2020 - 04-11-2020
         </Text>
       </View>
@@ -70,7 +61,9 @@ const CardSolidarityCampaing = () => {
         
         <TouchableOpacity>
         <View style={styles.campaingLink}>
-          <Feather name="link" size={25} color="#FFFFFF" />
+          <Image 
+            source={donate}
+          />
         </View>
         </TouchableOpacity>
       </View>
@@ -85,7 +78,7 @@ const styles = StyleSheet.create({
   listItem: {
     marginTop: 10,
     //padding      : 10,
-    backgroundColor: "#ffffff",
+    backgroundColor: "#6272a4",
     width: '90%',
     height: 600,
     alignSelf: "center",
@@ -105,8 +98,8 @@ const styles = StyleSheet.create({
     height: '50%',
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
-    borderBottomLeftRadius: 100,
-    borderBottomRightRadius: 100,
+    borderBottomLeftRadius: 50,
+    borderBottomRightRadius: 50,
     
   },
 
@@ -117,7 +110,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderRadius: 5,
     position: 'absolute',
-    marginTop: 250,
+    marginTop: 270,
   },
 
   info: {
@@ -128,13 +121,13 @@ const styles = StyleSheet.create({
   },
 
   nameCampaing: {
-    color: "#272343",
+    color: "#f8f8f2",
     fontSize: 30,
     fontWeight: "bold",
   },
 
   texInfo: {
-    color: "#000",
+    color: "#f8f8f2",
     marginTop: 10,
     marginBottom: 7,
     paddingLeft: 10,
@@ -142,7 +135,7 @@ const styles = StyleSheet.create({
   },
 
   locateCampaing: {
-    color: "#272343",
+    color: "#bbbfca",
     fontSize: 18,
     padding: 2,
     marginBottom: 10,
@@ -150,7 +143,7 @@ const styles = StyleSheet.create({
   },
 
   dataCampaing: {
-    color: "#272343",
+    color: "#bbbfca",
     fontSize: 18,
   },
 

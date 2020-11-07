@@ -8,6 +8,7 @@ export default function SolidarityCampaings() {
     <ScrollView style={styles.container}>
      <CardSolidarityCampaings />
      <CardSolidarityCampaings />
+     <CardSolidarityCampaings />
     </ScrollView>
   )
 }
@@ -15,5 +16,6 @@ export default function SolidarityCampaings() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#282a36',
   }
 })

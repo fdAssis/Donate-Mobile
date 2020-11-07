@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 
 import Routes from './src/Routes/routes';
 import Card from './src/components/CardSolidarityCampaings'
