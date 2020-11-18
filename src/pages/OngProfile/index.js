@@ -1,125 +1,126 @@
-import React, {useRef} from 'react';
-import {View, Animated} from 'react-native';
-import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import { createDrawerNavigator } from '@react-navigation/drawer';
-import { createStackNavigator } from '@react-navigation/stack';
+import * as React from 'react';
+import { Animated, View, TextInput, TouchableOpacity, Text, Image } from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
+//import { StackNavigationProp } from '@react-navigation/stack';
+import {
+  useCollapsibleSubHeader,
+  CollapsibleSubHeaderAnimator,
+} from 'react-navigation-collapsible';
+import TabNavigator from './Tab';
 
-import CustomDrawerContent from '../../components/CustomHeaders/CustomDrawerContent';
-import CustomHeader from '../../components/OngProfileTopNavegation/topNavegation'
+// Constantes 
+const HEADER_MAX_HEIGHT = 200;
+const HEADER_MIN_HEIGHT = 70;
+const PROFILE_IMAGE_MAX_HEIGHT = 80;
+const PROFILE_IMAGE_MIN_HEIGHT = 40;
 
-export const BANNER_H = 250;
-export const TOPNAVI_H = 50;
+const createRow = (onPress) => ({ item }) => (
+
+  <TouchableOpacity
+    onPress={onPress}
+    style={{
+      width: '100%',
+      height: 50,
+      alignItems: 'center',
+      justifyContent: 'center',
+      borderBottomColor: 'gray',
+      borderBottomWidth: 1,
+    }}>
+    <Text
+      style={{
+        fontSize: 22,
+      }}>
+      {item}
+    </Text>
+  </TouchableOpacity>
+);
+
+//import { StackParamList } from '../App';
+
+const data = [];
+for (let i = 0; i < 100; i++) {
+  data.push(i);
+}
 
 const img = "https://www.defensoria.ba.def.br/wp-content/uploads/2018/01/banner-central.jpg";
 
-import SolidarityCampaigns from './Tab/solidarityCampaings';
-import AboutOng from './Tab/aboutOng';
-import SolidarityActions from './Tab/solidarityAction';
 
-const Tab = createMaterialTopTabNavigator();
-
-function TabNavigator() {
-  return (
-    <Tab.Navigator
-    initialRouteName="solidarity"
-      tabBarOptions={{
-        activeTintColor: '#f8f8f2',
-        inactiveTintColor: '#6272a4',
-        style: { //Adição do style
-          backgroundColor: '#44475a', // Aplicando a cor ao background
-        },
-        labelStyle: {
-          textAlign: 'center',
-        },
-        indicatorStyle: {
-          borderBottomColor: '#f8f8f2',
-          borderBottomWidth: 5,
-        },
-      }}>
-      <Tab.Screen name="solidarity" component={SolidarityCampaigns} options={{tabBarLabel:"Campanhas"}}/>
-      <Tab.Screen name="actions" component={SolidarityActions} options={{tabBarLabel:"Ações"}} />
-      <Tab.Screen name="about" component={AboutOng} options={{tabBarLabel:"Sobre"}}/>
-    </Tab.Navigator>
-  );
-}
-
-function HomeScreen ({navigation}) {
-  const scrollA = useRef(new Animated.Value(0)).current;
-  return (
-    <View>
-      <CustomHeader title="Projeto Acolher" scrollA={scrollA} showCancel={true} navigation={navigation}/>
-      <Animated.ScrollView
-        onScroll={e => console.log(e.nativeEvent.contentOffset.y)}
-        onScroll={Animated.event(
-          [{nativeEvent: {contentOffset: {y: scrollA}}}],
-          {useNativeDriver: true},
-        )}
-      >
-        <View style={styles.bannerContainer}>
-          <Animated.Image
-            style={styles.banner(scrollA)}
-            source={{uri:img}}
-          />
-        </View>
-        <TabNavigator />
-      </Animated.ScrollView>
+const MySearchBar = () => (
+  <View style={{ flex: 1, backgroundColor: '#FFFFFF' }}>
+    <View style={{
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      right: 0,
+      height: HEADER_MAX_HEIGHT,
+    }}>
+      <Image
+        source={{ uri: img }}
+        style={{ flex: 1, width: null, height: null }}
+      />
     </View>
-  );
-}
 
-const Drawer = createDrawerNavigator();
-function DrawerNavigator() {
+    {/** Foto de perfil da ong */}
+    <View style={{
+      height: PROFILE_IMAGE_MAX_HEIGHT,
+      width: PROFILE_IMAGE_MAX_HEIGHT,
+      borderRadius: PROFILE_IMAGE_MAX_HEIGHT / 2,
+      borderColor: '#0B9B87',
+      borderWidth: 3,
+      overflow: 'hidden',
+      marginTop: HEADER_MAX_HEIGHT - (PROFILE_IMAGE_MAX_HEIGHT / 2),
+      marginLeft: 10,
+    }}>
+      <Image
+        source={{ uri: img }}
+        style={{ flex: 1, width: null, height: null }}
+      />
+    </View>
+
+    {/** Nome da ong */}
+    <View>
+      <Text style={{
+        fontWeight: 'bold',
+        fontSize: 20,
+        paddingLeft: 10,
+        paddingBottom: 10,
+      }}>
+        Projeto acolher
+        </Text>
+    </View>
+
+  </View>
+);
+
+const SubHeaderScreen = ({ navigation }) => {
+  const {
+    onScroll,
+    containerPaddingTop,
+    scrollIndicatorInsetTop,
+    translateY,
+  } = useCollapsibleSubHeader();
+
   return (
-    <Drawer.Navigator
-      initialRouteName="HomeSceen"
-      drawerContent={props => CustomDrawerContent(props)}
-    >
-      <Drawer.Screen name="HomeScreen" component={HomeScreen} />
-      <Drawer.Screen name="MenuTab" component={TabNavigator} />
-    </Drawer.Navigator>
-  )
-}
+    <>
+      <Animated.View
+        onScroll={onScroll}
+        contentContainerStyle={{ paddingTop: containerPaddingTop }}
+        scrollIndicatorInsets={{ top: scrollIndicatorInsetTop }}
+        style={{
+          borderWidth: 3,
+          borderColor: 'red',
+        }}
+      >
+        <View style={{ flex: 1 }}>
+          <TabNavigator />
+        </View>
+      </Animated.View>
 
-const navOptionHandle = () => ({
-  headerShown: false
-});
-
-const StackApp = createStackNavigator();
-
-const OngProfile = () => {
-  return (
-    <StackApp.Navigator initialRouteName="HomeApp">
-      <StackApp.Screen name="HomeApp" component={DrawerNavigator} options={navOptionHandle} />
-    </StackApp.Navigator>
+      <CollapsibleSubHeaderAnimator translateY={translateY}>
+        <MySearchBar />
+      </CollapsibleSubHeaderAnimator>
+    </>
   );
 };
 
-const styles = {
-  bannerContainer: {
-    marginTop: -1000,
-    paddingTop: 1000,
-    alignItems: 'center',
-    overflow: 'hidden',
-    backgroundColor: '#282a36',
-  },
-  banner: scrollA => ({
-    height: BANNER_H,
-    width: '150%',
-    transform: [
-      {
-        translateY: scrollA.interpolate({
-          inputRange: [-BANNER_H, 0, BANNER_H, BANNER_H + 1],
-          outputRange: [-BANNER_H / 2, 0, BANNER_H * 0.75, BANNER_H * 0.75],
-        }),
-      },
-      {
-        scale: scrollA.interpolate({
-          inputRange: [-BANNER_H, 0, BANNER_H, BANNER_H + 1],
-          outputRange: [2, 1, 0.5, 0.5],
-        }),
-      },
-    ],
-  }),
-};
-
-export default OngProfile;
+export default SubHeaderScreen;

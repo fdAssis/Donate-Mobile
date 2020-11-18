@@ -1,7 +1,6 @@
 import React from 'react';
 import {StyleSheet,View,Image,Text,TouchableOpacity} from 'react-native'
 import { Feather } from '@expo/vector-icons';
-import { LinearGradient } from 'expo-linear-gradient';
 
 const img = "https://www.jornaldosudoeste.com/wp-content/uploads/2018/11/Natal-2018-VITORIADACONQUISTA-300x300.jpg";
 

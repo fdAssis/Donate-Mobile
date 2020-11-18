@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, View, TouchableOpacity, SafeAreaView } from 'react-native';
 
-import CustomHeader from '../../../components/CustomHeaders/CustomHeader';
+import CustomHeader from '../../../../Components/CustomHeaders/CustomHeader';
 
 
 export default function NotificationsScreen({ navigation }) {

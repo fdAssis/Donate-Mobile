@@ -37,7 +37,7 @@ export default function TopNavigation ({ navigation, title, scrollA, showCancel 
           {
             showCancel ? 
             (
-              <BorderlessButton  onPress={() => navigation.openDrawer()}>
+              <BorderlessButton  onPress={() => navigation.navigate('OngMap')}>
                 <Feather name="map-pin" size={24} color="#0B9B87" />
               </BorderlessButton>
             ) : 

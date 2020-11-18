@@ -4,15 +4,15 @@ import { NavigationContainer } from '@react-navigation/native';
 
 const { Navigator, Screen } = createStackNavigator();
 
-import OngProfile from '../pages/OngProfile/index';
-import OngMap from '../pages/OngsMap';
+import DrawerOngProfile from '../Pages/OngProfile/Drawer';
+import OngMap from '../Pages/OngsMap';
 
 export default function Routes() {
   return (
     <NavigationContainer>
       <Navigator screenOptions={{ headerShown: false}}>
 
-        {/*
+      {/*
       <Screen
         name="SelectMapPosition"
         component={SelectMapPosition}
@@ -22,6 +22,7 @@ export default function Routes() {
         }}
       />
       */}
+      
         <Screen
           name         = "OngMap"
           component    = {OngMap}
@@ -29,7 +30,8 @@ export default function Routes() {
 
         <Screen
           name="OngProfile"
-          component={OngProfile}
+          component={DrawerOngProfile}
+          options={{headerShown: false}}
         />
 
       </Navigator>
