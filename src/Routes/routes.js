@@ -4,8 +4,9 @@ import { NavigationContainer } from '@react-navigation/native';
 
 const { Navigator, Screen } = createStackNavigator();
 
-import DrawerOngProfile from '../Pages/OngProfile/Drawer';
+import HomeScreen from '../Pages/OngProfile/Drawer';
 import OngMap from '../Pages/OngsMap';
+
 
 export default function Routes() {
   return (
@@ -29,8 +30,8 @@ export default function Routes() {
         />
 
         <Screen
-          name="OngProfile"
-          component={DrawerOngProfile}
+          name="HomeScreen"
+          component={HomeScreen}
           options={{headerShown: false}}
         />
 

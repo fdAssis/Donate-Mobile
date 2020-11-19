@@ -1,66 +1,48 @@
 import * as React from 'react';
-import { Animated, View, TextInput, TouchableOpacity, Text, Image } from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
-//import { StackNavigationProp } from '@react-navigation/stack';
-import {
-  useCollapsibleSubHeader,
-  CollapsibleSubHeaderAnimator,
-} from 'react-navigation-collapsible';
+
 import TabNavigator from './Tab';
 
-// Constantes 
-const HEADER_MAX_HEIGHT = 200;
+
+import { StyleSheet, Text, View, ScrollView, Image, Platform, StatusBar} from 'react-native'
+import Animated from 'react-native-reanimated'
+const images = [
+{ id: 1, uri : "https://r1.ilikewallpaper.net/iphone-wallpapers/download/78957/red-and-blue-wallpaper-iphone-wallpaper-ilikewallpaper_com.jpg"},
+{ id: 2, uri : "https://picjumbo.com/wp-content/uploads/PANO0001-2-Pano-1080x1548.jpg"},
+{ id: 3, uri : "https://r1.ilikewallpaper.net/iphone-wallpapers/download/78957/red-and-blue-wallpaper-iphone-wallpaper-ilikewallpaper_com.jpg"},
+{ id: 4, uri : "https://picjumbo.com/wp-content/uploads/PANO0001-2-Pano-1080x1548.jpg"},
+];
+
+const img = "https://www.defensoria.ba.def.br/wp-content/uploads/2018/01/banner-central.jpg";
+
+const HEADER_HEIGHT = Platform.OS == 'ios'?115:70+StatusBar.currentHeight;
+
+const HEADER_MAX_HEIGHT = 20;
 const HEADER_MIN_HEIGHT = 70;
 const PROFILE_IMAGE_MAX_HEIGHT = 80;
 const PROFILE_IMAGE_MIN_HEIGHT = 40;
 
-const createRow = (onPress) => ({ item }) => (
-
-  <TouchableOpacity
-    onPress={onPress}
-    style={{
-      width: '100%',
-      height: 50,
-      alignItems: 'center',
-      justifyContent: 'center',
-      borderBottomColor: 'gray',
-      borderBottomWidth: 1,
-    }}>
-    <Text
-      style={{
-        fontSize: 22,
+export default function ProfileOng() {
+  const scrollY = new Animated.Value(0);
+  const diffClantScrollY = Animated.diffClamp(scrollY, 0, HEADER_HEIGHT);
+  const headerY = Animated.interpolate(diffClantScrollY, {
+    inputRange:[0, HEADER_HEIGHT],
+    outputRange:[0, -HEADER_HEIGHT]
+  })
+  return (
+  <View style={{flex:1}}>
+    <Animated.View style={{
+        position: "absolute",
+        left: 0,
+        right: 0,
+        top: 0,
+        height: HEADER_HEIGHT,
+        backgroundColor: 'gray',
+        zIndex: 1000,
+        elevation: 1000,
+        transform:[{translateY:headerY}],
+        padding: 45,
       }}>
-      {item}
-    </Text>
-  </TouchableOpacity>
-);
 
-//import { StackParamList } from '../App';
-
-const data = [];
-for (let i = 0; i < 100; i++) {
-  data.push(i);
-}
-
-const img = "https://www.defensoria.ba.def.br/wp-content/uploads/2018/01/banner-central.jpg";
-
-
-const MySearchBar = () => (
-  <View style={{ flex: 1, backgroundColor: '#FFFFFF' }}>
-    <View style={{
-      position: 'absolute',
-      top: 0,
-      left: 0,
-      right: 0,
-      height: HEADER_MAX_HEIGHT,
-    }}>
-      <Image
-        source={{ uri: img }}
-        style={{ flex: 1, width: null, height: null }}
-      />
-    </View>
-
-    {/** Foto de perfil da ong */}
     <View style={{
       height: PROFILE_IMAGE_MAX_HEIGHT,
       width: PROFILE_IMAGE_MAX_HEIGHT,
@@ -68,59 +50,16 @@ const MySearchBar = () => (
       borderColor: '#0B9B87',
       borderWidth: 3,
       overflow: 'hidden',
-      marginTop: HEADER_MAX_HEIGHT - (PROFILE_IMAGE_MAX_HEIGHT / 2),
-      marginLeft: 10,
     }}>
       <Image
         source={{ uri: img }}
         style={{ flex: 1, width: null, height: null }}
       />
     </View>
+    </Animated.View>
 
-    {/** Nome da ong */}
-    <View>
-      <Text style={{
-        fontWeight: 'bold',
-        fontSize: 20,
-        paddingLeft: 10,
-        paddingBottom: 10,
-      }}>
-        Projeto acolher
-        </Text>
-    </View>
-
+    <TabNavigator />
+  
   </View>
-);
-
-const SubHeaderScreen = ({ navigation }) => {
-  const {
-    onScroll,
-    containerPaddingTop,
-    scrollIndicatorInsetTop,
-    translateY,
-  } = useCollapsibleSubHeader();
-
-  return (
-    <>
-      <Animated.View
-        onScroll={onScroll}
-        contentContainerStyle={{ paddingTop: containerPaddingTop }}
-        scrollIndicatorInsets={{ top: scrollIndicatorInsetTop }}
-        style={{
-          borderWidth: 3,
-          borderColor: 'red',
-        }}
-      >
-        <View style={{ flex: 1 }}>
-          <TabNavigator />
-        </View>
-      </Animated.View>
-
-      <CollapsibleSubHeaderAnimator translateY={translateY}>
-        <MySearchBar />
-      </CollapsibleSubHeaderAnimator>
-    </>
-  );
-};
-
-export default SubHeaderScreen;
+  )
+}

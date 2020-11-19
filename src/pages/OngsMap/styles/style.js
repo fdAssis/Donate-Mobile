@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
 
   map: {
     width: Dimensions.get('window').width,
-    height: Dimensions.get('window').height,
+    height: '100%',
   },
 
   calloutContainer: {
@@ -29,6 +29,7 @@ const styles = StyleSheet.create({
   },
 
   footer: {
+    /*
     position: 'absolute',
     left: 24,
     right: 24,
@@ -38,12 +39,14 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     height: 56,
     paddingLeft: 24,
+    *
 
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
 
     elevation: 3
+    */
   },
 
   footerText: {
@@ -51,11 +54,15 @@ const styles = StyleSheet.create({
   },
 
   createOrphanageButton: {
+    position: 'absolute',
+    right: 80,
+    bottom: Dimensions.get('window').height - 70,
+
+    elevation: 3,
     width: 60,
     height: 60,
     backgroundColor: '#1A54F8',
     borderRadius: 50,
-
     justifyContent: 'center',
     alignItems: 'center'
   }

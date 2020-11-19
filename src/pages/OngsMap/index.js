@@ -3,7 +3,7 @@ import React from 'react';
 import { Text, View } from 'react-native';
 import Svg, { Circle, Image as ImageSvg, Defs, ClipPath } from 'react-native-svg';
 import MapView, { PROVIDER_GOOGLE, Marker, Callout } from 'react-native-maps';
-import { Feather } from '@expo/vector-icons';
+import Icon from 'react-native-vector-icons/FontAwesome5';
 import { useNavigation } from '@react-navigation/native';
 import { RectButton, TextInput } from 'react-native-gesture-handler';
 
@@ -19,6 +19,10 @@ const OngMap = () => {
 
   function handleNavigateToOngProfile() {
     navigation.navigate('OngProfile');
+  }
+
+  function handleNavigateToHome() {
+    navigation.navigate('HomeScreen');
   }
 
   /*
@@ -70,12 +74,8 @@ const OngMap = () => {
 
       </MapView>
       <View style={styles.footer}>
-        <TextInput style={styles.footerText}>
-          
-        </TextInput>
-
-        <RectButton style={styles.createOrphanageButton} onPress={() => {}}>
-          <Feather name="search" size={20} color="#fff" />
+        <RectButton style={styles.createOrphanageButton} onPress={handleNavigateToHome}>
+          <Icon name="home" size={20} color="#fff" />
         </RectButton>
       </View>
     </View>
