@@ -3,8 +3,9 @@ import { Text, View, StyleSheet } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
-import FabButton from '../../../Components/FabButton';
-import Home from '../../HomeScreen';
+import FabButton from '../../Components/FabButton';
+
+import Home from '../../Pages/HomeScreen';
 
 function User() {
   return (

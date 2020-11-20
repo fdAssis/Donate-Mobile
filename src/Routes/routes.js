@@ -4,7 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 
 const { Navigator, Screen } = createStackNavigator();
 
-import HomeScreen from '../Pages/OngProfile/Drawer';
+import HomeScreen from './Drawer';
 import OngMap from '../Pages/OngsMap';
 
 
